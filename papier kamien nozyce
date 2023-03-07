@@ -1,0 +1,76 @@
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Witaj w grze Kamień-Papier-Nożyce!");
+
+        while (true)
+        {
+            Console.WriteLine("Wybierz: (1) kamień, (2) papier, (3) nożyce");
+            string input = Console.ReadLine();
+
+            if (input == "1" || input == "2" || input == "3")
+            {
+                int playerChoice = int.Parse(input);
+                int computerChoice = new Random().Next(1, 4);
+
+                Console.WriteLine("Twój wybór: " + GetChoiceName(playerChoice));
+                Console.WriteLine("Wybór komputera: " + GetChoiceName(computerChoice));
+
+                int result = GetResult(playerChoice, computerChoice);
+
+                if (result == 0)
+                {
+                    Console.WriteLine("Remis!");
+                }
+                else if (result == 1)
+                {
+                    Console.WriteLine("Wygrałeś!");
+                }
+                else
+                {
+                    Console.WriteLine("Przegrałeś.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nieprawidłowe wejście. Spróbuj ponownie.");
+            }
+
+            Console.WriteLine();
+        }
+    }
+    static string GetChoiceName(int choice)
+    {
+        if (choice == 1)
+        {
+            return "kamień";
+        }
+        else if (choice == 2)
+        {
+            return "papier";
+        }
+        else
+        {
+            return "nożyce";
+        }
+    }
+    static int GetResult(int playerChoice, int computerChoice)
+    {
+        if (playerChoice == computerChoice)
+        {
+            return 0;
+        }
+        else if (playerChoice == 1 && computerChoice == 3 || playerChoice == 2 && computerChoice == 1 || playerChoice == 3 && computerChoice == 2)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+}
